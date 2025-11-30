@@ -32,7 +32,7 @@ BACKGROUND_KEYS = {"background", "Background", "backgrounds", "Backgrounds"}
 OUT_DIR = pathlib.Path("gorbage_truck_images")
 
 # Helius setup
-HELIUS_API_KEY = os.getenv("HELIUS_API_KEY") or "PASTE_YOUR_HELIUS_API_KEY_HERE"
+HELIUS_API_KEY = os.getenv("HELIUS_API_KEY") or "11d6ec7a-8173-4765-8b83-2135db7ca6f7"
 RPC_URL = f"https://mainnet.helius-rpc.com/?api-key={HELIUS_API_KEY}"
 
 # Simple cache for off-chain metadata fetches
@@ -398,7 +398,7 @@ def main() -> None:
             print(f"[error] Failed to download {mint} from {img_url}: {exc}")
 
         # Be gentle to APIs
-        time.sleep(1.0)
+        time.sleep(0.1)
 
     print(f"Done. Downloaded {downloaded} images into: {OUT_DIR.resolve()}")
 

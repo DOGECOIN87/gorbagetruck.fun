@@ -20,12 +20,10 @@ const AnimatedText: React.FC<{ text: string; className?: string }> = ({ text, cl
 // Marquee component for logos
 const LogoMarquee: React.FC = () => {
   const logos = [
-    { src: '/assets/trashcoin.png', alt: 'Trash Coin' },
-    { src: '/assets/wallet.png', alt: 'Wallet' },
-    { src: '/assets/truck.png', alt: 'Truck' },
-    { src: '/assets/binlogo.png', alt: 'Bin' },
-    { src: '/assets/ufo.png', alt: 'UFO' },
-    { src: '/assets/incinerator.jpg', alt: 'Incinerator' },
+    { src: '/gorbage_truck_images/gorbagio_1071.png', alt: 'Gorbagio #1071' },
+    { src: '/gorbage_truck_images/gorbagio_3340.png', alt: 'Gorbagio #3340' },
+    { src: '/gorbage_truck_images/gorbagio_3494.png', alt: 'Gorbagio #3494' },
+    { src: '/gorbage_truck_images/gorbagio_4103.png', alt: 'Gorbagio #4103' },
   ];
 
   return (
@@ -37,7 +35,7 @@ const LogoMarquee: React.FC = () => {
             <img 
               src={logo.src} 
               alt={logo.alt} 
-              className="h-16 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity"
+              className="h-20 w-20 object-cover rounded-xl opacity-70 hover:opacity-100 transition-all hover:scale-110 border-2 border-lime-500/20 hover:border-lime-500/60"
             />
           </div>
         ))}
