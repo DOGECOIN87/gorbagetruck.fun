@@ -114,6 +114,7 @@ const GameRunner: React.FC<GameRunnerProps> = ({
   
   // Theme State
   const themeRef = useRef<ColorTheme>(THEMES.NIGHT); // Default
+  const timeOfDayRef = useRef<TimeOfDay>('NIGHT'); // Track actual time for headlights
   const weatherRef = useRef<WeatherType>('CLEAR');
   const rainParticlesRef = useRef<{x: number, y: number, speed: number, len: number}[]>([]);
 
@@ -137,6 +138,7 @@ const GameRunner: React.FC<GameRunnerProps> = ({
     }
     
     themeRef.current = THEMES[timeOfDay];
+    timeOfDayRef.current = timeOfDay;
 
   }, []);
 
@@ -1217,74 +1219,79 @@ const GameRunner: React.FC<GameRunnerProps> = ({
     }
 
     // Headlights (At FRONT of cabin, pointing forward into +Z)
-    const headlightZ = cabinZ + 18; // Just in front of windshield
-    const headlightY = 25 + yOffset;
+    // Only show headlights during NIGHT or TWILIGHT
+    const showHeadlights = timeOfDayRef.current === 'NIGHT' || timeOfDayRef.current === 'TWILIGHT';
     
-    // Draw headlight beams shooting forward (into +Z, which appears higher on screen due to perspective)
-    // Left headlight beam - BRIGHTER AND WIDER
-    const hlStart_L = project(p.x - 25, headlightY, headlightZ);
-    const hlEnd1_L = project(p.x - 80, headlightY, headlightZ + 600);
-    const hlEnd2_L = project(p.x + 30, headlightY, headlightZ + 600);
-    
-    if (hlStart_L.visible) {
-        ctx.save();
-        ctx.globalAlpha = 0.6; // Increased from 0.3
-        const grad = ctx.createLinearGradient(hlStart_L.x, hlStart_L.y, (hlEnd1_L.x + hlEnd2_L.x) / 2, (hlEnd1_L.y + hlEnd2_L.y) / 2);
-        grad.addColorStop(0, 'rgba(255, 255, 220, 1)'); // Brighter center
-        grad.addColorStop(0.7, 'rgba(255, 255, 200, 0.3)');
-        grad.addColorStop(1, 'rgba(255, 255, 200, 0)');
-        ctx.fillStyle = grad;
+    if (showHeadlights) {
+        const headlightZ = cabinZ + 18; // Just in front of windshield
+        const headlightY = 25 + yOffset;
         
-        ctx.beginPath();
-        ctx.moveTo(hlStart_L.x, hlStart_L.y);
-        ctx.lineTo(hlEnd1_L.x, hlEnd1_L.y);
-        ctx.lineTo(hlEnd2_L.x, hlEnd2_L.y);
-        ctx.fill();
-        ctx.restore();
+        // Draw headlight beams shooting forward (into +Z, which appears higher on screen due to perspective)
+        // Left headlight beam - BRIGHTER AND WIDER
+        const hlStart_L = project(p.x - 25, headlightY, headlightZ);
+        const hlEnd1_L = project(p.x - 80, headlightY, headlightZ + 600);
+        const hlEnd2_L = project(p.x + 30, headlightY, headlightZ + 600);
         
-        // Lamp glare - BRIGHTER AND BIGGER
-        ctx.save();
-        ctx.translate(hlStart_L.x, hlStart_L.y);
-        ctx.fillStyle = '#ffffff'; // Pure white
-        ctx.shadowColor = '#ffff00';
-        ctx.shadowBlur = 25; // Increased from 15
-        ctx.beginPath();
-        ctx.arc(0, 0, 10 * hlStart_L.scale, 0, Math.PI * 2); // Increased from 6
-        ctx.fill();
-        ctx.restore();
-    }
-    
-    // Right headlight beam - BRIGHTER AND WIDER
-    const hlStart_R = project(p.x + 25, headlightY, headlightZ);
-    const hlEnd1_R = project(p.x - 30, headlightY, headlightZ + 600);
-    const hlEnd2_R = project(p.x + 80, headlightY, headlightZ + 600);
-    
-    if (hlStart_R.visible) {
-        ctx.save();
-        ctx.globalAlpha = 0.6; // Increased from 0.3
-        const grad = ctx.createLinearGradient(hlStart_R.x, hlStart_R.y, (hlEnd1_R.x + hlEnd2_R.x) / 2, (hlEnd1_R.y + hlEnd2_R.y) / 2);
-        grad.addColorStop(0, 'rgba(255, 255, 220, 1)'); // Brighter center
-        grad.addColorStop(0.7, 'rgba(255, 255, 200, 0.3)');
-        grad.addColorStop(1, 'rgba(255, 255, 200, 0)');
-        ctx.fillStyle = grad;
+        if (hlStart_L.visible) {
+            ctx.save();
+            ctx.globalAlpha = 0.6; // Increased from 0.3
+            const grad = ctx.createLinearGradient(hlStart_L.x, hlStart_L.y, (hlEnd1_L.x + hlEnd2_L.x) / 2, (hlEnd1_L.y + hlEnd2_L.y) / 2);
+            grad.addColorStop(0, 'rgba(255, 255, 220, 1)'); // Brighter center
+            grad.addColorStop(0.7, 'rgba(255, 255, 200, 0.3)');
+            grad.addColorStop(1, 'rgba(255, 255, 200, 0)');
+            ctx.fillStyle = grad;
+            
+            ctx.beginPath();
+            ctx.moveTo(hlStart_L.x, hlStart_L.y);
+            ctx.lineTo(hlEnd1_L.x, hlEnd1_L.y);
+            ctx.lineTo(hlEnd2_L.x, hlEnd2_L.y);
+            ctx.fill();
+            ctx.restore();
+            
+            // Lamp glare - BRIGHTER AND BIGGER
+            ctx.save();
+            ctx.translate(hlStart_L.x, hlStart_L.y);
+            ctx.fillStyle = '#ffffff'; // Pure white
+            ctx.shadowColor = '#ffff00';
+            ctx.shadowBlur = 25; // Increased from 15
+            ctx.beginPath();
+            ctx.arc(0, 0, 10 * hlStart_L.scale, 0, Math.PI * 2); // Increased from 6
+            ctx.fill();
+            ctx.restore();
+        }
         
-        ctx.beginPath();
-        ctx.moveTo(hlStart_R.x, hlStart_R.y);
-        ctx.lineTo(hlEnd1_R.x, hlEnd1_R.y);
-        ctx.lineTo(hlEnd2_R.x, hlEnd2_R.y);
-        ctx.fill();
-        ctx.restore();
+        // Right headlight beam - BRIGHTER AND WIDER
+        const hlStart_R = project(p.x + 25, headlightY, headlightZ);
+        const hlEnd1_R = project(p.x - 30, headlightY, headlightZ + 600);
+        const hlEnd2_R = project(p.x + 80, headlightY, headlightZ + 600);
         
-        // Lamp glare - BRIGHTER AND BIGGER
-        ctx.save();
-        ctx.translate(hlStart_R.x, hlStart_R.y);
-        ctx.fillStyle = '#ffffff'; // Pure white
-        ctx.shadowColor = '#ffff00';
-        ctx.shadowBlur = 25; // Increased from 15
-        ctx.beginPath();
-        ctx.arc(0, 0, 10 * hlStart_R.scale, 0, Math.PI * 2); // Increased from 6
-        ctx.fill();
-        ctx.restore();
+        if (hlStart_R.visible) {
+            ctx.save();
+            ctx.globalAlpha = 0.6; // Increased from 0.3
+            const grad = ctx.createLinearGradient(hlStart_R.x, hlStart_R.y, (hlEnd1_R.x + hlEnd2_R.x) / 2, (hlEnd1_R.y + hlEnd2_R.y) / 2);
+            grad.addColorStop(0, 'rgba(255, 255, 220, 1)'); // Brighter center
+            grad.addColorStop(0.7, 'rgba(255, 255, 200, 0.3)');
+            grad.addColorStop(1, 'rgba(255, 255, 200, 0)');
+            ctx.fillStyle = grad;
+            
+            ctx.beginPath();
+            ctx.moveTo(hlStart_R.x, hlStart_R.y);
+            ctx.lineTo(hlEnd1_R.x, hlEnd1_R.y);
+            ctx.lineTo(hlEnd2_R.x, hlEnd2_R.y);
+            ctx.fill();
+            ctx.restore();
+            
+            // Lamp glare - BRIGHTER AND BIGGER
+            ctx.save();
+            ctx.translate(hlStart_R.x, hlStart_R.y);
+            ctx.fillStyle = '#ffffff'; // Pure white
+            ctx.shadowColor = '#ffff00';
+            ctx.shadowBlur = 25; // Increased from 15
+            ctx.beginPath();
+            ctx.arc(0, 0, 10 * hlStart_R.scale, 0, Math.PI * 2); // Increased from 6
+            ctx.fill();
+            ctx.restore();
+        }
     }
     
     // Tail lights (AT BACK -Z, pointing toward camera)
