@@ -1,5 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap');
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  overflow: hidden;
+  background-color: #000000;
+  touch-action: none;
+  font-family: 'Montserrat', sans-serif;
+}
+
 /* ===== SCROLL-TRIGGERED ANIMATIONS ===== */
 /* Base states for scroll animations - using visibility instead of opacity 0 */
 .scroll-fade-in {
