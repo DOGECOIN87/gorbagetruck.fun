@@ -483,3 +483,127 @@ button, a {
     padding: 0.5rem !important;
   }
 }
+
+
+/* ===== ENHANCED RESPONSIVE UTILITIES ===== */
+/* Ultra-small devices (< 320px) */
+@media (max-width: 319px) {
+  html, body {
+    font-size: 12px;
+  }
+  
+  .text-\[3rem\] {
+    font-size: 2rem !important;
+  }
+  
+  .text-\[1\.5rem\] {
+    font-size: 1rem !important;
+  }
+}
+
+/* Small phones (320px - 480px) */
+@media (max-width: 480px) {
+  .game-container {
+    width: 100% !important;
+    height: 100dvh !important;
+    max-width: 100% !important;
+    border-radius: 0 !important;
+  }
+  
+  button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* Medium phones (481px - 768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+  .game-container {
+    max-width: 95vw !important;
+    max-height: 95vh !important;
+    border-radius: 1.5rem !important;
+  }
+}
+
+/* Tablets and larger (769px+) */
+@media (min-width: 769px) {
+  .game-container {
+    max-width: 500px !important;
+    max-height: 750px !important;
+    aspect-ratio: 2 / 3 !important;
+    border-radius: 2rem !important;
+  }
+}
+
+/* Large screens (1200px+) */
+@media (min-width: 1200px) {
+  .game-container {
+    max-width: 600px !important;
+    max-height: 900px !important;
+  }
+}
+
+/* Landscape orientation fixes */
+@media (orientation: landscape) and (max-height: 500px) {
+  .game-container {
+    max-height: 95vh !important;
+  }
+  
+  .menu-content {
+    overflow-y: auto !important;
+    max-height: 90vh !important;
+  }
+}
+
+/* Aspect ratio fixes for different devices */
+@media (min-aspect-ratio: 1/1) {
+  .game-container {
+    max-width: min(95vw, 600px) !important;
+    max-height: min(95vh, 900px) !important;
+  }
+}
+
+/* Very wide screens */
+@media (min-width: 2560px) {
+  .game-container {
+    max-width: 800px !important;
+    max-height: 1200px !important;
+  }
+}
+
+/* Foldable and dual-screen devices */
+@media (screen-spanning: single-fold-vertical) {
+  .game-container {
+    max-width: 50vw !important;
+  }
+}
+
+@media (screen-spanning: single-fold-horizontal) {
+  .game-container {
+    max-height: 50vh !important;
+  }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  button {
+    min-height: 48px;
+    min-width: 48px;
+    padding: 0.75rem !important;
+  }
+  
+  .text-sm {
+    font-size: 0.875rem !important;
+  }
+  
+  .text-base {
+    font-size: 1rem !important;
+  }
+}
+
+/* High DPI displays (retina) */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .game-container {
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8) !important;
+  }
+}

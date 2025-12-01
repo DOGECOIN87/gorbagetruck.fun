@@ -148,7 +148,7 @@ const App: React.FC = () => {
   return (
     <div className="relative w-full h-[100dvh] bg-black overflow-hidden font-sans select-none flex justify-center items-center ios-inset-padding in-app-height-fix">
       
-      <div className="relative w-full h-full max-h-[100dvh] md:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl md:max-h-[85vh] xl:max-h-[90vh] md:aspect-[2/3] bg-gray-900 shadow-2xl overflow-hidden border-0 md:border-2 border-[#14F195]/20 rounded-none md:rounded-3xl wallet-resize">
+      <div className="game-container relative w-full h-full max-h-[100dvh] md:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl md:max-h-[85vh] xl:max-h-[90vh] md:aspect-[2/3] bg-gray-900 shadow-2xl overflow-hidden border-0 md:border-2 border-[#14F195]/20 rounded-none md:rounded-3xl wallet-resize">
         <GameRunner 
           gameState={gameState}
           setGameState={setGameState}
