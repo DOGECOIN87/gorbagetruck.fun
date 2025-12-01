@@ -48,7 +48,7 @@ const loadImage = (src: string, removeBlackBg: boolean = false): Promise<HTMLIma
 
 export const loadGameAssets = async (): Promise<GameAssets> => {
   // Base
-  const truck = await loadImage('./game-assets/gorbage-truck-2.png', true); 
+  const truck = await loadImage('./assets/gorbage-truck-2.png', true); 
   // Use available assets in /public/assets to avoid 404s
   const ground = await loadImage('./assets/trashbag.jpg');
   const trashCan = await loadImage('./assets/binlogo.png'); // Fallback
@@ -57,32 +57,32 @@ export const loadGameAssets = async (): Promise<GameAssets> => {
   const introBg = await loadImage('./assets/intro_bg_new.png');
   const introBgNew = await loadImage('./assets/intro_bg_new.png');
   const ufo = await loadImage('./assets/ufo.png');
-  const gorbhouseCry = await loadImage('./game-assets/gorbhouse-cry.png', true); // New asset for game over screen
+  const gorbhouseCry = await loadImage('./assets/gorbhouse-cry.png', true); // New asset for game over screen
 
   // Powerups
   // Try to load new asset first, fall back to old one if it fails
-  const incinerator = await loadImage('./game-assets/Logo-gor-incinerator.jpg', true) || 
+  const incinerator = await loadImage('./assets/Logo-gor-incinerator.jpg', true) || 
                      await loadImage('./assets/incinerator.jpg', true);
-  const gorboyConsole = await loadImage('./game-assets/Gorboyconsole.png', true) || 
+  const gorboyConsole = await loadImage('./assets/Gorboyconsole.png', true) || 
                        await loadImage('./assets/gorboyconsole.png', true);
   const gorbillions = await loadImage('./assets/gorbillions.png', true);
   
   // Obstacles
-  const newObstacle = await loadImage('./game-assets/4.webp', false); // Disabled removeBlackBg for testing
+  const newObstacle = await loadImage('./assets/4.webp', false); // Disabled removeBlackBg for testing
   
   // Stickers/Collectibles (new assets)
-  const stickerpill = await loadImage('./game-assets/stickerpill.webp', false); // Disabled removeBlackBg for testing
-  const sticker3 = await loadImage('./game-assets/sticker3.webp', false); // Disabled removeBlackBg for testing
+  const stickerpill = await loadImage('./assets/stickerpill.webp', false); // Disabled removeBlackBg for testing
+  const sticker3 = await loadImage('./assets/sticker3.webp', false); // Disabled removeBlackBg for testing
   
   // Decorations (trashbag for side decoration)
   const trashBagDecor = await loadImage('./assets/trashbag.png', false); // Disabled removeBlackBg for testing
 
   // Points
   // Try to load new asset first, fall back to old one if it fails
-  const trashCoin = await loadImage('./game-assets/trashcoinlogo.png', true) || 
+  const trashCoin = await loadImage('./assets/trashcoinlogo.png', true) || 
                    await loadImage('./assets/trashcoin.png', true);
   const gorbagana = await loadImage('./assets/gorbagana.jpg', true);
-  const wallet = await loadImage('./game-assets/gorbagwallet-removebg-preview.png', true) || 
+  const wallet = await loadImage('./assets/gorbagwallet-removebg-preview.png', true) || 
                 await loadImage('./assets/wallet.png', true);
 
   return {
