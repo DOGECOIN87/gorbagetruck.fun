@@ -23,28 +23,8 @@ const AnimatedText: React.FC<{ text: string; className?: string }> = ({ text, cl
 
 // Marquee component for logos
 const LogoMarquee: React.FC = () => {
-  const logos = [
-    { src: '/gorbage_truck_images/gorbagio_1071.png', alt: 'Gorbagio #1071' },
-    { src: '/gorbage_truck_images/gorbagio_3340.png', alt: 'Gorbagio #3340' },
-    { src: '/gorbage_truck_images/gorbagio_3494.png', alt: 'Gorbagio #3494' },
-    { src: '/gorbage_truck_images/gorbagio_4103.png', alt: 'Gorbagio #4103' },
-  ];
-
-  return (
-    <div className="marquee-container marquee-mask marquee-slow py-8">
-      <div className="marquee-content">
-        {[...logos, ...logos].map((logo, index) => (
-          <div key={index} className="marquee-item">
-            <img 
-              src={logo.src} 
-              alt={logo.alt} 
-              className="h-20 w-20 object-cover rounded-xl opacity-70 hover:opacity-100 transition-all hover:scale-110 border-2 border-lime-500/20 hover:border-lime-500/60"
-            />
-          </div>
-        ))}
-      </div>
-    </div>
-  );
+  // Images were missing from the repository, removing the marquee to prevent broken UI
+  return null;
 };
 
 const App: React.FC = () => {
@@ -261,7 +241,7 @@ const App: React.FC = () => {
                  </div>
 
                  <div className="absolute bottom-0 left-0 right-0 w-full scroll-fade-in scroll-delay-7 overflow-hidden">
-                   <LogoMarquee />
+                   {/* <LogoMarquee /> - Removed as images were missing from the repository */ }
                  </div>
               </div>
             )}

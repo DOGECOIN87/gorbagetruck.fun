@@ -1503,6 +1503,8 @@ const GameRunner: React.FC<GameRunnerProps> = ({
       }
     });
     
+
+    
     // Clean up passed entities
     entitiesRef.current = entitiesRef.current.filter(
       e => e.z > -CAMERA_DISTANCE || e.collected
@@ -1531,7 +1533,7 @@ const GameRunner: React.FC<GameRunnerProps> = ({
 
   // --- Animation Loop ---
   
-  const animate = useCallback(() => {
+  const animate = () => {
     if (!canvasRef.current) return;
     
     const canvas = canvasRef.current;
@@ -1540,6 +1542,8 @@ const GameRunner: React.FC<GameRunnerProps> = ({
     
     // Clear canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+
     
     // Update game state
     updateGame();
@@ -1552,7 +1556,7 @@ const GameRunner: React.FC<GameRunnerProps> = ({
     
     // Schedule next frame
     requestRef.current = requestAnimationFrame(animate);
-  }, []);
+  };
 
   // --- Key Event Handlers ---
   
