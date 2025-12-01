@@ -534,9 +534,11 @@ const GameRunner: React.FC<GameRunnerProps> = ({
     } else if (type === EntityType.COLLECTIBLE) {
       const cr = Math.random();
       // Trash Coin is MOST COMMON collectible
-      if (cr > 0.4) subtype = 'TRASH_COIN';
-      else if (cr > 0.2) subtype = 'GORBAGANA';
-      else if (cr > 0.1) subtype = 'WALLET';
+      if (cr > 0.5) subtype = 'TRASH_COIN';
+      else if (cr > 0.3) subtype = 'GORBAGANA';
+      else if (cr > 0.2) subtype = 'STICKER_PILL';
+      else if (cr > 0.1) subtype = 'STICKER_3';
+      else if (cr > 0.05) subtype = 'WALLET';
       else subtype = 'TRASH_COIN';
 
       dims = { w: 60, h: 60, d: 60 };
@@ -632,6 +634,8 @@ const GameRunner: React.FC<GameRunnerProps> = ({
               
               playSound('speedup');
           }
+          else if (e.subtype === 'STICKER_PILL') baseScore = 150;
+          else if (e.subtype === 'STICKER_3') baseScore = 300;
           else if (e.subtype === 'TRASH_COIN') baseScore = 50;
           
           comboCountRef.current += 1;
@@ -1312,6 +1316,12 @@ const GameRunner: React.FC<GameRunnerProps> = ({
       } else if (e.subtype === 'GORBAGANA') {
         img = assets.gorbagana;
         color = '#FFC107'; // Yellow for banana
+      } else if (e.subtype === 'STICKER_PILL') {
+        img = assets.stickerpill;
+        color = '#FF69B4'; // Hot pink for sticker pill
+      } else if (e.subtype === 'STICKER_3') {
+        img = assets.sticker3;
+        color = '#00CED1'; // Dark turquoise for sticker 3
       } else if (e.subtype === 'WALLET') {
         img = assets.wallet;
         color = '#795548'; // Brown for wallet
