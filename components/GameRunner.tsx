@@ -534,11 +534,14 @@ const GameRunner: React.FC<GameRunnerProps> = ({
     } else if (type === EntityType.COLLECTIBLE) {
       const cr = Math.random();
       // Trash Coin is MOST COMMON collectible
-      if (cr > 0.5) subtype = 'TRASH_COIN';
-      else if (cr > 0.3) subtype = 'GORBAGANA';
-      else if (cr > 0.2) subtype = 'STICKER_PILL';
-      else if (cr > 0.1) subtype = 'STICKER_3';
-      else if (cr > 0.05) subtype = 'WALLET';
+      if (cr > 0.50) subtype = 'TRASH_COIN';
+      else if (cr > 0.35) subtype = 'GORBAGANA';
+      else if (cr > 0.25) subtype = 'STICKER_PILL';
+      else if (cr > 0.17) subtype = 'STICKER_3';
+      else if (cr > 0.12) subtype = 'OSCAR_BACKPACK';
+      else if (cr > 0.08) subtype = 'PILL_MUMMY';
+      else if (cr > 0.04) subtype = 'TRASH_KING';
+      else if (cr > 0.02) subtype = 'WALLET';
       else subtype = 'TRASH_COIN';
 
       dims = { w: 60, h: 60, d: 60 };
@@ -629,15 +632,18 @@ const GameRunner: React.FC<GameRunnerProps> = ({
               baseScore = 200;
               // Trigger 2 Lane Mode
               twoLaneTimerRef.current = 600; // 10 Seconds
-              
+
               // Ensure player is in valid lane for 2-lane mode (0 or 1)
               if (p.lane > 1) p.lane = 1;
-              
+
               playSound('speedup');
           }
           else if (e.subtype === 'STICKER_PILL') baseScore = 150;
           else if (e.subtype === 'STICKER_3') baseScore = 300;
           else if (e.subtype === 'TRASH_COIN') baseScore = 50;
+          else if (e.subtype === 'OSCAR_BACKPACK') baseScore = 250;
+          else if (e.subtype === 'PILL_MUMMY') baseScore = 350;
+          else if (e.subtype === 'TRASH_KING') baseScore = 400;
           
           comboCountRef.current += 1;
           if (comboCountRef.current % ITEMS_PER_COMBO === 0) {
@@ -1326,6 +1332,15 @@ const GameRunner: React.FC<GameRunnerProps> = ({
       } else if (e.subtype === 'WALLET') {
         img = assets.wallet;
         color = '#795548'; // Brown for wallet
+      } else if (e.subtype === 'OSCAR_BACKPACK') {
+        img = assets.oscarBackpack;
+        color = '#9945FF'; // Purple for Oscar's backpack
+      } else if (e.subtype === 'PILL_MUMMY') {
+        img = assets.pillMummy;
+        color = '#E6D5AC'; // Mummy bandage color
+      } else if (e.subtype === 'TRASH_KING') {
+        img = assets.trashKing;
+        color = '#FFD700'; // Gold for the king
       }
     } else if (e.type === EntityType.OBSTACLE) {
       if (e.subtype === 'TRASH_BAG') {
