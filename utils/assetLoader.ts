@@ -72,9 +72,9 @@ export const loadGameAssets = async (): Promise<GameAssets> => {
   const sticker3 = await loadImage('./assets/sticker3.webp', false);
 
   // New Character Sprites
-  const oscarBackpack = await loadImage('./assets/oscar-solana-backpack-sprite.png', true);
-  const pillMummy = await loadImage('./assets/pill-mummy-sprite.png', true);
-  const trashKing = await loadImage('./assets/trash-king-sprite.png', true);
+  const oscarBackpack = await loadImage('./assets/oscar-solana-backpack-sprite.png', false);
+  const pillMummy = await loadImage('./assets/pill-mummy-sprite.png', false);
+  const trashKing = await loadImage('./assets/trash-king-sprite.png', false);
   
   // Decorations (trashbag for side decoration)
   const trashBagDecor = await loadImage('./assets/trashbag.png', false); // Decoration asset
