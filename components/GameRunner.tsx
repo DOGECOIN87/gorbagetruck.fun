@@ -649,10 +649,7 @@ const GameRunner: React.FC<GameRunnerProps> = ({
           playSound('collect');
           createParticles(ParticleType.SPARKLE, e.x, e.y, e.z, PARTICLE_COUNT_COLLECT, '#FFFF00');
         } else {
-          // Obstacle
-          // If jumping, avoid collision
-          if (isJumpingRef.current && jumpYRef.current > 50) return; 
-
+          // Obstacle - collision detected (heightOverlap already accounts for jumping)
           e.collected = true; 
           livesRef.current -= 1;
           setLives(livesRef.current);
