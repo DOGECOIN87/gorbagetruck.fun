@@ -10,7 +10,7 @@ export enum EntityType {
   POWERUP = 'POWERUP',
 }
 
-export type CollectibleSubtype = 'TRASH_COIN' | 'GORBAGANA' | 'WALLET' | 'STICKERPILL' | 'STICKER3' | 'GENERIC_POINT';
+export type CollectibleSubtype = 'TRASH_COIN' | 'GORBAGANA' | 'WALLET' | 'STICKERPILL' | 'STICKER3' | 'OSCAR_BACKPACK' | 'PILL_MUMMY' | 'TRASH_KING' | 'GENERIC_POINT';
 export type ObstacleSubtype = 'TRASH_BAG';
 export type PowerupSubtype = 'GOR_INCINERATOR' | 'GORBOY_CONSOLE' | 'GORBILLIONS';
 
@@ -61,6 +61,11 @@ export interface GameAssets {
   // Collectibles/Stickers
   stickerpill: HTMLImageElement | null;
   sticker3: HTMLImageElement | null;
+
+  // New Character Sprites
+  oscarBackpack: HTMLImageElement | null;
+  pillMummy: HTMLImageElement | null;
+  trashKing: HTMLImageElement | null;
 
   // Points (+Score)
   trashCoin: HTMLImageElement | null;
